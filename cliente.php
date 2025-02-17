@@ -12,7 +12,7 @@
 if (isset($_GET["action"]) && isset($_GET["id"]) && $_GET["action"] == "get_datos_autor") 
 {
     //Se realiza la peticion a la api que nos devuelve el JSON con la información de los autores
-    $app_info = file_get_contents('http://localhost/Tarea_7/api.php?action=get_datos_autor&id=' . $_GET["id"]);
+    $app_info = file_get_contents('http://localhost/simpleLibrary/api.php?action=get_datos_autor&id=' . $_GET["id"]);
     // Se decodifica el fichero JSON y se convierte a array
     //var_dump($app_info);
     $app_info = json_decode($app_info);
@@ -36,7 +36,7 @@ if (isset($_GET["action"]) && isset($_GET["id"]) && $_GET["action"] == "get_dato
     <?php foreach($app_info->libros as $libro): ?>
         <li>
             
-            <a href="<?php echo "http://localhost/Tarea_7/index.php?action=get_datos_libro&id=" . $libro->id  ?>">   
+            <a href="<?php echo "http://localhost/simpleLibrary/index.php?action=get_datos_libro&id=" . $libro->id  ?>">   
             <?php echo $libro->titulo; ?>
             </a>
         </li>
@@ -44,11 +44,11 @@ if (isset($_GET["action"]) && isset($_GET["id"]) && $_GET["action"] == "get_dato
     </ul>	
     <br />
     <!-- Enlace para volver a la lista de autores -->
-    <a href="http://localhost/Tarea_7/index.php?action=get_listado_autores" alt="Lista de autores" class="volver">Volver a la lista de autores</a>
+    <a href="http://localhost/simpleLibrary/index.php?action=get_listado_autores" alt="Lista de autores" class="volver">Volver a la lista de autores</a>
     <!--Imprimimos datos especificado del libro -->
 <?php }else if(isset($_GET["action"]) && isset($_GET["id"]) && $_GET["action"] == "get_datos_libro") {
             //Se realiza la peticion a la api que nos devuelve el JSON con la información de los autores
-            $app_info = file_get_contents('http://localhost/Tarea_7/api.php?action=get_datos_libro&id=' . $_GET["id"]);
+            $app_info = file_get_contents('http://localhost/simpleLibrary/api.php?action=get_datos_libro&id=' . $_GET["id"]);
             //decodificar JSON, a array
             $app_info = json_decode($app_info);
 ?>
@@ -59,14 +59,14 @@ if (isset($_GET["action"]) && isset($_GET["id"]) && $_GET["action"] == "get_dato
         </br>
     </div>
     <div class="autor-libro">
-    <a href="<?php echo "http://localhost/Tarea_7/index.php?action=get_datos_autor&id=" . $app_info->autor->id  ?>">
+    <a href="<?php echo "http://localhost/simpleLibrary/index.php?action=get_datos_autor&id=" . $app_info->autor->id  ?>">
     <h2>Datos de su autor</h2>
     <p>Nombre: <?php echo $app_info->autor->nombre; ?></p>
     <p>Apellidos: <?php echo $app_info->autor->apellidos; ?></p>
     </a>
     </div>
     </br>
-    <a href="http://localhost/Tarea_7/index.php?action=get_listado_autores" alt="Lista de autores" class="volver">Volver a la lista de autores</a>
+    <a href="http://localhost/simpleLibrary/index.php?action=get_listado_autores" alt="Lista de autores" class="volver">Volver a la lista de autores</a>
 
     
 <?php
@@ -74,13 +74,13 @@ if (isset($_GET["action"]) && isset($_GET["id"]) && $_GET["action"] == "get_dato
 else //sino muestra la lista de autores
 {
     // Pedimos al la api que nos devuelva una lista de autores. La respuesta se da en formato JSON
-    $lista_autores = file_get_contents('http://localhost/Tarea_7/api.php?action=get_listado_autores');
+    $lista_autores = file_get_contents('http://localhost/simpleLibrary/api.php?action=get_listado_autores');
     // Convertimos el fichero JSON en array
 	//var_dump($lista_autores);
     $lista_autores = json_decode($lista_autores);
     
     //Pedimos lista de libros
-    $lista_libros = file_get_contents('http://localhost/Tarea_7/api.php?action=get_listado_libros');
+    $lista_libros = file_get_contents('http://localhost/simpleLibrary/api.php?action=get_listado_libros');
     //Convertimos JSON en array
     $lista_libros = json_decode($lista_libros);
 ?>
@@ -92,7 +92,7 @@ else //sino muestra la lista de autores
     <?php foreach($lista_autores as $autores): ?>
         <li>
             <!-- Enlazamos cada nombre de autor con su informacion (primer if) -->
-            <a href="<?php echo "http://localhost/Tarea_7/index.php?action=get_datos_autor&id=" . $autores->id  ?>">
+            <a href="<?php echo "http://localhost/simpleLibrary/index.php?action=get_datos_autor&id=" . $autores->id  ?>">
             <?php echo $autores->nombre . " " . $autores->apellidos ?>
             </a>
         </li>
@@ -103,7 +103,7 @@ else //sino muestra la lista de autores
         <h2>Libros</h2>
         <?php foreach ($lista_libros as $libros) { ?>
             <li>
-                <a href="<?php echo "http://localhost/Tarea_7/index.php?action=get_datos_libro&id=" . $libros->id  ?>">
+                <a href="<?php echo "http://localhost/simpleLibrary/index.php?action=get_datos_libro&id=" . $libros->id  ?>">
             <?php echo $libros->id . " " . $libros->titulo ?>
             </a>
             </li>
